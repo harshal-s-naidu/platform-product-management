@@ -1,0 +1,199 @@
+{
+  "package": "platform-product-management",
+  "version": "1.0.1",
+  "note": "Approximate tokens = characters/4, not a tokenizer or usage forecast. Excludes work context/history. Manifest excludes itself.",
+  "files": [
+    {
+      "path": "START_HERE.md",
+      "bytes": 7890,
+      "sha256": "2793cd21f388b5191b68f4a18c269b5b71499cc981429113544711f1ca291d32",
+      "approx_tokens": 1963
+    },
+    {
+      "path": "DESIGN_REVIEW.md",
+      "bytes": 12252,
+      "sha256": "fff756ba50ce9cbc41caac37588b60ca2fab8afc3926b60c78cb0aec5d7be63a",
+      "approx_tokens": 3060
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 7267,
+      "sha256": "adda1f9895c816dc8ce00c389318a86a666693ff60d8707fef40f8d77498d232",
+      "approx_tokens": 1813
+    },
+    {
+      "path": "CLAUDE.md",
+      "bytes": 3167,
+      "sha256": "1b5641ff90ea60529e19211489531158ec3c5a949529f1574b98b877adb2fa68",
+      "approx_tokens": 792
+    },
+    {
+      "path": "COPILOT_SKILL.md",
+      "bytes": 9519,
+      "sha256": "cb32acac3955181bb646ef849b5ae8f0781f0a4c9257d9ba79bd6ab99b9434c5",
+      "approx_tokens": 2374
+    },
+    {
+      "path": "references/operating-model.md",
+      "bytes": 7480,
+      "sha256": "687ba586cfccf18b389f18aad97514b3f13a8f45db81226adc841ee90e19584b",
+      "approx_tokens": 1866
+    },
+    {
+      "path": "references/workflows.md",
+      "bytes": 5773,
+      "sha256": "d0a743ac916398a10ccace8fe1b6823cae82dd168a216c126c4fade5ab12d6dc",
+      "approx_tokens": 1434
+    },
+    {
+      "path": "references/capabilities-and-target-state.md",
+      "bytes": 7339,
+      "sha256": "6cb055e1476b315ed2fa0f991d4543dccffa99558222d3f8718ce0ee11ce46fa",
+      "approx_tokens": 1832
+    },
+    {
+      "path": "references/prioritization-and-roadmaps.md",
+      "bytes": 7263,
+      "sha256": "b4a9f495a5e578e02b40dbbfaaa80de531255be39e900c0d75b0470214fcf488",
+      "approx_tokens": 1809
+    },
+    {
+      "path": "references/decisions-evidence-and-value.md",
+      "bytes": 5941,
+      "sha256": "6dea886c8025b5ffaf1be2bb704bc9d3938d2aaff471a5e1b6a069ba6113494c",
+      "approx_tokens": 1483
+    },
+    {
+      "path": "references/reviews-and-communication.md",
+      "bytes": 5201,
+      "sha256": "dfd0a77a6c30634afb7984171102bcd400277de2474b10f6526c8e4e0f53355f",
+      "approx_tokens": 1296
+    },
+    {
+      "path": "references/data-contract.md",
+      "bytes": 9191,
+      "sha256": "a5871d0453650bb7048bcce7dbb8c919e32ace449604f785da399f90cb1de067",
+      "approx_tokens": 2295
+    },
+    {
+      "path": "references/persistence-and-handoffs.md",
+      "bytes": 10343,
+      "sha256": "0efbe47d7c339e9b0b5018169370f167e7e41399079630559dfb7d2d0a12c518",
+      "approx_tokens": 2585
+    },
+    {
+      "path": "references/excel-storage.md",
+      "bytes": 8367,
+      "sha256": "55b213f5b6afe4b84a8b776f9476832c94f892bca93cdbc760d7b0225e192c5f",
+      "approx_tokens": 2092
+    },
+    {
+      "path": "references/context-policy.md",
+      "bytes": 4541,
+      "sha256": "b4b3a276241aba175b81e9bd09dfb5e22ab698492d3d371eb208c6b7166db83a",
+      "approx_tokens": 1134
+    },
+    {
+      "path": "references/tool-adapters.md",
+      "bytes": 4787,
+      "sha256": "359c7da6f6d6e971fc6253a114edc37175da412672414a4dfbfdc26dcb5e7cae",
+      "approx_tokens": 1197
+    },
+    {
+      "path": "templates/work-products.md",
+      "bytes": 6592,
+      "sha256": "fda3ff980694b7a06b819c4e10096cb77746af8ee103dcbc72807b6585cbc5d2",
+      "approx_tokens": 1647
+    },
+    {
+      "path": "examples/worked-examples.md",
+      "bytes": 8807,
+      "sha256": "12694b42e4d9bb5448865f49b7bf41b7b778fd0a245c2192db31f7a5ec04c1eb",
+      "approx_tokens": 2198
+    },
+    {
+      "path": "optional/BUILDER_BRIEF.md",
+      "bytes": 4462,
+      "sha256": "b46b7536990e6791759e787917ba05cef028febca63708bd242e765109f2f5b2",
+      "approx_tokens": 1116
+    },
+    {
+      "path": "optional/UI_SPECIFICATION.md",
+      "bytes": 10237,
+      "sha256": "1f3ed37f00cc90250d6caa4cec9aeaf0f67467e1837499570f0c7188bc209082",
+      "approx_tokens": 2549
+    },
+    {
+      "path": "context/organization.template.md",
+      "bytes": 2431,
+      "sha256": "d83b1293d17b28e17aa53014b08a8bae1fa5be1666f97ea991308bd0cf75a0c3",
+      "approx_tokens": 606
+    },
+    {
+      "path": "schemas/state.schema.json",
+      "bytes": 12571,
+      "sha256": "73431c65a6a0174ebddab31771b4a95ee4be40a6df937f36becfa2dd484a2069",
+      "approx_tokens": 3143
+    },
+    {
+      "path": "data/state.json",
+      "bytes": 336,
+      "sha256": "b96425e75a346aa6727e55164fd7b1bb5cb8dfdf8d2288a40182ea84a8696c95",
+      "approx_tokens": 84
+    },
+    {
+      "path": "examples/sample-state.json",
+      "bytes": 13785,
+      "sha256": "ad8fab4585bbdaef9d6f56582be6e6b347500c1277c4c3ebce7f3cf8649a67cd",
+      "approx_tokens": 3446
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 1574,
+      "sha256": "b61b3e1268882390879dde65cbfae479382f0f34b55e9ff3467c09e8606358f7",
+      "approx_tokens": 391
+    },
+    {
+      "path": "scripts/validate_state.py",
+      "bytes": 15294,
+      "sha256": "d57364ad11fece45b0cacf58adcc98273004149e7b77f84f8e9cc06d0b6c7339",
+      "approx_tokens": 3824
+    },
+    {
+      "path": "scripts/test_validate_state.py",
+      "bytes": 5293,
+      "sha256": "9d77e5724722f959720f15f1fc505f011e68a8a58a37bba383aa6000aafc088f",
+      "approx_tokens": 1323
+    },
+    {
+      "path": "scripts/build_editions.py",
+      "bytes": 7523,
+      "sha256": "bc19af435c67a8254ca6894b36cd7d33e058d49d5fd4a733280588dbd745e118",
+      "approx_tokens": 1879
+    },
+    {
+      "path": "MASTER_SPECIFICATION.md",
+      "bytes": 141833,
+      "sha256": "6602f6fe317071f7a6806ce351d2181d4dd774e115131abbcb3a5297d7d45e88",
+      "approx_tokens": 35386
+    },
+    {
+      "path": "COPILOT_COMPLETE.md",
+      "bytes": 99172,
+      "sha256": "cc1b7c8ac2c1d5a091d84296506ba0717088473d005d3b586d769f6915c53d34",
+      "approx_tokens": 24741
+    },
+    {
+      "path": "COPILOT_SKILL.txt",
+      "bytes": 9519,
+      "sha256": "cb32acac3955181bb646ef849b5ae8f0781f0a4c9257d9ba79bd6ab99b9434c5",
+      "approx_tokens": 2374
+    },
+    {
+      "path": "COPILOT_COMPLETE.txt",
+      "bytes": 99172,
+      "sha256": "cc1b7c8ac2c1d5a091d84296506ba0717088473d005d3b586d769f6915c53d34",
+      "approx_tokens": 24741
+    }
+  ]
+}

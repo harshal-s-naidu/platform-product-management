@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "store_id": "pm-local-starter",
+  "state_revision": 0,
+  "updated_at": "2026-09-07T00:00:00Z",
+  "use_cases": [],
+  "capabilities": [],
+  "use_case_capabilities": [],
+  "roadmap_items": [],
+  "dependencies": [],
+  "decisions": [],
+  "assumptions": [],
+  "risks": [],
+  "metrics": [],
+  "evidence": []
+}

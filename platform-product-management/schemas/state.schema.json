@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Platform PM state 1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "store_id", "state_revision", "updated_at", "use_cases", "capabilities", "use_case_capabilities", "roadmap_items", "dependencies", "decisions", "assumptions", "risks", "metrics", "evidence"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "store_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{2,63}$"},
+    "state_revision": {"type": "integer", "minimum": 0},
+    "updated_at": {"$ref": "#/$defs/timestamp"},
+    "use_cases": {"type": "array", "items": {"$ref": "#/$defs/useCase"}},
+    "capabilities": {"type": "array", "items": {"$ref": "#/$defs/capability"}},
+    "use_case_capabilities": {"type": "array", "items": {"$ref": "#/$defs/needLink"}},
+    "roadmap_items": {"type": "array", "items": {"$ref": "#/$defs/roadmap"}},
+    "dependencies": {"type": "array", "items": {"$ref": "#/$defs/dependency"}},
+    "decisions": {"type": "array", "items": {"$ref": "#/$defs/decision"}},
+    "assumptions": {"type": "array", "items": {"$ref": "#/$defs/assumption"}},
+    "risks": {"type": "array", "items": {"$ref": "#/$defs/risk"}},
+    "metrics": {"type": "array", "items": {"$ref": "#/$defs/metric"}},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "texts": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
+    "id": {"type": "string", "pattern": "^(UC|CAP|LNK|RM|DEP|DEC|ASM|RISK|MET|EVD)-[0-9]{3,}$"},
+    "ids": {"type": "array", "items": {"$ref": "#/$defs/id"}, "uniqueItems": true},
+    "timestamp": {"type": "string", "format": "date-time", "pattern": "Z$"},
+    "date": {"type": "string", "format": "date"},
+    "record": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "title", "status", "owner", "created_at", "updated_at", "record_version", "evidence_ids", "attributes"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "title": {"$ref": "#/$defs/text"}, "status": {"$ref": "#/$defs/text"},
+        "owner": {"type": ["string", "null"], "minLength": 1},
+        "created_at": {"$ref": "#/$defs/timestamp"}, "updated_at": {"$ref": "#/$defs/timestamp"},
+        "record_version": {"type": "integer", "minimum": 1}, "evidence_ids": {"$ref": "#/$defs/ids"},
+        "attributes": {"type": "object"}
+      }
+    },
+    "useCase": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^UC-"},
+        "status": {"enum": ["idea", "discovery", "candidate", "active", "production", "paused", "stopped", "retired"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["problem", "users", "outcome"],
+          "properties": {
+            "problem": {"$ref": "#/$defs/text"}, "users": {"$ref": "#/$defs/text"}, "outcome": {"$ref": "#/$defs/text"},
+            "product_area": {"$ref": "#/$defs/text"}, "sponsor": {"$ref": "#/$defs/text"},
+            "alternatives": {"$ref": "#/$defs/texts"}, "strategic_fit": {"$ref": "#/$defs/text"},
+            "constraints": {"$ref": "#/$defs/texts"}, "delivery_links": {"$ref": "#/$defs/texts"},
+            "metric_ids": {"$ref": "#/$defs/ids"}
+          }
+        }
+      }
+    },
+    "capability": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^CAP-"}, "status": {"enum": ["candidate", "piloting", "available", "deprecated", "retired"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["description", "classification"],
+          "properties": {
+            "description": {"$ref": "#/$defs/text"},
+            "classification": {"enum": ["use_case_specific", "reusable", "shared_platform", "enterprise_shared_service", "commodity_external", "candidate_standardization"]},
+            "consumer_proposition": {"$ref": "#/$defs/text"}, "service_contract": {"$ref": "#/$defs/text"},
+            "current_implementation": {"$ref": "#/$defs/text"}, "tactical_implementation": {"$ref": "#/$defs/text"},
+            "target_implementation": {"$ref": "#/$defs/text"}, "migration_trigger": {"$ref": "#/$defs/text"},
+            "migration_path": {"$ref": "#/$defs/text"}, "expected_lifespan": {"$ref": "#/$defs/text"},
+            "reversibility": {"$ref": "#/$defs/text"}, "metric_ids": {"$ref": "#/$defs/ids"}
+          }
+        }
+      }
+    },
+    "needLink": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^LNK-"}, "status": {"enum": ["active", "withdrawn"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["use_case_id", "capability_id", "need", "demand_state"],
+          "properties": {
+            "use_case_id": {"$ref": "#/$defs/id", "pattern": "^UC-"},
+            "capability_id": {"$ref": "#/$defs/id", "pattern": "^CAP-"}, "need": {"$ref": "#/$defs/text"},
+            "demand_state": {"enum": ["hypothesized", "confirmed", "adopted"]},
+            "consumer_requirements": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    },
+    "roadmap": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^RM-"}, "status": {"enum": ["proposed", "selected", "in_progress", "achieved", "paused", "stopped"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["outcome", "horizon", "kind", "priority", "confidence"],
+          "properties": {
+            "outcome": {"$ref": "#/$defs/text"}, "horizon": {"enum": ["now", "next", "later"]},
+            "horizon_detail": {"$ref": "#/$defs/text"},
+            "kind": {"enum": ["outcome", "capability", "learning", "migration", "retirement"]},
+            "priority": {"enum": ["high", "medium", "low", "unknown"]},
+            "confidence": {"enum": ["high", "medium", "low", "unknown"]},
+            "use_case_ids": {"$ref": "#/$defs/ids"}, "capability_ids": {"$ref": "#/$defs/ids"},
+            "metric_ids": {"$ref": "#/$defs/ids"}, "priority_rationale": {"$ref": "#/$defs/text"},
+            "readiness_condition": {"$ref": "#/$defs/text"}, "exit_criteria": {"$ref": "#/$defs/text"},
+            "effort": {"$ref": "#/$defs/text"}, "capacity_basis": {"$ref": "#/$defs/text"},
+            "date": {"$ref": "#/$defs/date"}, "date_kind": {"enum": ["forecast", "commitment"]},
+            "date_source": {"$ref": "#/$defs/text"}, "experiment": {"$ref": "#/$defs/experiment"}
+          }
+        }
+      }
+    },
+    "experiment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["hypothesis", "method", "cohort", "success_criteria", "stopping_rule", "decision_implication"],
+      "properties": {
+        "hypothesis": {"$ref": "#/$defs/text"}, "method": {"$ref": "#/$defs/text"}, "cohort": {"$ref": "#/$defs/text"},
+        "success_criteria": {"$ref": "#/$defs/text"}, "stopping_rule": {"$ref": "#/$defs/text"}, "decision_implication": {"$ref": "#/$defs/text"}
+      }
+    },
+    "dependency": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^DEP-"}, "status": {"enum": ["hypothesized", "confirmed", "resolved", "rejected"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["dependent_id", "prerequisite_id", "reason", "type", "strength"],
+          "properties": {
+            "dependent_id": {"$ref": "#/$defs/id", "pattern": "^(UC|CAP|RM)-"},
+            "prerequisite_id": {"$ref": "#/$defs/id", "pattern": "^(UC|CAP|RM)-"},
+            "reason": {"$ref": "#/$defs/text"},
+            "type": {"enum": ["capability", "data_access", "governance", "technical", "operational", "capacity", "external"]},
+            "strength": {"enum": ["hard", "soft"]}, "satisfaction_condition": {"$ref": "#/$defs/text"},
+            "resolution": {"$ref": "#/$defs/text"}, "needed_by": {"$ref": "#/$defs/date"}
+          }
+        }
+      }
+    },
+    "decision": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^DEC-"}, "status": {"enum": ["proposed", "adopted", "superseded", "withdrawn"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["question", "options", "rationale", "target_ids", "provisional"],
+          "properties": {
+            "question": {"$ref": "#/$defs/text"}, "options": {"$ref": "#/$defs/texts", "minItems": 2},
+            "rationale": {"$ref": "#/$defs/text"}, "target_ids": {"$ref": "#/$defs/ids", "minItems": 1},
+            "provisional": {"type": "boolean"}, "chosen_option": {"$ref": "#/$defs/text"},
+            "decided_on": {"$ref": "#/$defs/date"}, "consequences": {"$ref": "#/$defs/text"},
+            "reversibility": {"$ref": "#/$defs/text"}, "revisit_trigger": {"$ref": "#/$defs/text"},
+            "assumption_ids": {"$ref": "#/$defs/ids"}, "supersedes_id": {"$ref": "#/$defs/id", "pattern": "^DEC-"}
+          }
+        }
+      }
+    },
+    "assumption": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^ASM-"}, "status": {"enum": ["open", "validated", "invalidated", "retired"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["statement", "target_ids", "impact_if_false", "test_or_trigger"],
+          "properties": {
+            "statement": {"$ref": "#/$defs/text"}, "target_ids": {"$ref": "#/$defs/ids", "minItems": 1},
+            "impact_if_false": {"$ref": "#/$defs/text"}, "test_or_trigger": {"$ref": "#/$defs/text"}, "test_result": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    },
+    "risk": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^RISK-"}, "status": {"enum": ["open", "mitigating", "accepted", "closed"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["kind", "cause_event_consequence", "target_ids", "likelihood", "impact"],
+          "properties": {
+            "kind": {"enum": ["risk", "issue"]}, "cause_event_consequence": {"$ref": "#/$defs/text"},
+            "target_ids": {"$ref": "#/$defs/ids", "minItems": 1},
+            "likelihood": {"enum": ["high", "medium", "low", "unknown"]}, "impact": {"enum": ["high", "medium", "low", "unknown"]},
+            "response": {"$ref": "#/$defs/text"}, "trigger": {"$ref": "#/$defs/text"}, "acceptance_or_closure_basis": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    },
+    "measurement": {
+      "type": "object", "additionalProperties": false, "required": ["value", "as_of"],
+      "properties": {"value": {"type": "number"}, "as_of": {"$ref": "#/$defs/date"}, "note": {"$ref": "#/$defs/text"}}
+    },
+    "metric": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^MET-"}, "status": {"enum": ["proposed", "active", "retired"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["definition", "unit", "direction", "target_ids", "source", "cadence"],
+          "properties": {
+            "definition": {"$ref": "#/$defs/text"}, "unit": {"$ref": "#/$defs/text"},
+            "direction": {"enum": ["increase", "decrease", "range", "monitor"]}, "target_ids": {"$ref": "#/$defs/ids", "minItems": 1},
+            "source": {"$ref": "#/$defs/text"}, "cadence": {"$ref": "#/$defs/text"},
+            "baseline": {"$ref": "#/$defs/measurement"}, "target": {"$ref": "#/$defs/measurement"},
+            "observations": {"type": "array", "items": {"$ref": "#/$defs/measurement"}}, "attribution_limits": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    },
+    "evidence": {
+      "allOf": [{"$ref": "#/$defs/record"}],
+      "properties": {
+        "id": {"pattern": "^EVD-"}, "status": {"enum": ["current", "superseded", "withdrawn"]},
+        "attributes": {
+          "type": "object", "additionalProperties": false, "required": ["claim", "source", "observed_on", "basis", "limitations"],
+          "properties": {
+            "claim": {"$ref": "#/$defs/text"}, "source": {"$ref": "#/$defs/text"}, "observed_on": {"$ref": "#/$defs/date"},
+            "basis": {"enum": ["observation", "reported", "inference"]}, "limitations": {"$ref": "#/$defs/text"},
+            "target_ids": {"$ref": "#/$defs/ids"}, "strength": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    }
+  }
+}
